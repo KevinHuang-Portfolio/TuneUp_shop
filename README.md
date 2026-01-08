@@ -1,8 +1,8 @@
 # 🎧 耳機電商專案規範 (TuneUp Earphone E-shop)
 
 ## 0. 總架構（Web Frame）
+```
 TuneUp_shop/
-
 ├── src/                 # 源代碼
 │   ├── assets/
 │   │   ├── vue.svg
@@ -11,10 +11,10 @@ TuneUp_shop/
 │   │   └── product_card/
 │   ├── components
 │   ├── App.vue
-│   ├── main.ts
+│   ├── main.ts                    
 │   ├── style.css
 ├── index.html
-
+```
 ## 1. 頁面通用架構 (Global Layout)
 - **所有頁面** 必須包含 `Navbar` (導覽列) 與 `Footer` (頁尾)。
 - 狀態管理：登入按鈕預設狀態為「尚未登入」。
