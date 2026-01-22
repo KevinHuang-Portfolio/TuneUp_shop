@@ -39,7 +39,7 @@
     }
     
     .info {
-        weight: 164px;
+        width: 164px;
         display: grid;
         gap: 12px;
     }
