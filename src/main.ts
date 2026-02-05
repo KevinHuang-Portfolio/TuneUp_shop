@@ -4,6 +4,7 @@ import PrimeVue from 'primevue/config'; // Gemini 說你沒寫這行
 import Aura from '@primevue/themes/aura';
 import './style.css'; 
 import App from './App.vue';
+import router from './router'
 
 const app = createApp(App);
 
@@ -14,4 +15,6 @@ app.use(PrimeVue, {
     }
 });
 
+
+app.use(router) // 告訴 Vue 我要使用路由功能
 app.mount('#app');

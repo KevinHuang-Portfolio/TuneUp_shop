@@ -9,14 +9,14 @@ import Button from 'primevue/button';
 
 <template class="body">
     <div class="navbar">
-        <img src="/picture/logo.svg" alt="Logo" class="logo" />
+        <img src="/src/picture/logo.svg" alt="Logo" class="logo" />
 
         <ul class="nav-links">
-            <li>首頁</li>
+            <router-link to="/">首頁</router-link>
             <div class="h-divider">
                 <Divider layout="vertical" />
             </div>
-            <li>入耳式</li>
+            <router-link to="/in-ear" class="nav-item">入耳式</router-link>
             <div class="h-divider">
                 <Divider layout="vertical" />
             </div>
@@ -38,7 +38,7 @@ import Button from 'primevue/button';
                 placeholder="#耳機關鍵字" 
                 class="search-input" />
                 <InputIcon class="icon-wrapper">
-                    <img src="/picture/icon/search.svg" 
+                    <img src="/src/picture/icon/search.svg" 
                     class="search-icon-img" />
                 </InputIcon>
             </IconField>
