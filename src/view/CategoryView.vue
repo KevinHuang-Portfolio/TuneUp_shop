@@ -62,9 +62,9 @@ onMounted(async () => {
       </div>
 
       <!-- 右側商品展示 -->
-      <div class="pl-[7.25em] flex-grow">
+      <div class="px-[7.25em] flex-grow">
         <a href="#" class="inline-block text-[2.25em] text-black no-underline mt-15">所有商品</a>
-        <div class="flex flex-wrap gap-[1.5em_1.25em] mt-8 justify-start">
+        <div class="grid grid-cols-3 gap-x-[20px] gap-y-[1.5em] mt-8 w-fit min-[1496px]:w-[901px] mx-auto lg:mx-0">
           <ProductCard
             v-for="item in DefaultCards"
             :key="item.id"

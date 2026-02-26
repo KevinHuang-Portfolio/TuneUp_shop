@@ -22,8 +22,8 @@ const goToDetail = () => {
 
 <template>
   <div 
-    class="flex flex-col cursor-pointer transition-transform hover:scale-105 flex-shrink-0 mx-auto max-w-full" 
-    :class="type === 'default' ? 'w-[17.9375em]' : 'w-[22.25em]'"
+    class="flex flex-col cursor-pointer transition-transform hover:scale-105 flex-shrink-0 max-w-full" 
+    :class="type === 'default' ? 'w-[17.9375em] min-[1496px]:w-[287px]' : 'w-[22.25em]'"
     @click="goToDetail"
   >
     <div v-if="type === 'default'" class="flex flex-col bg-[#f2f3f5] w-full h-[21.5em] rounded-lg p-0 items-center">
