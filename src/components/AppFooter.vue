@@ -7,20 +7,28 @@ const footerItems = [
 </script>
 
 <template>
-  <div class="footerContainer">
-    <div class="footerInner flex flex-col md:flex-row items-center justify-center w-full px-4">
-      <ul class="footerLinks flex flex-col md:flex-row items-center list-none p-0">
+  <footer class="footerContainer">
+    <div class="footerInner flex flex-col items-center justify-center w-full px-6">
+      
+      <!-- 連結區 -->
+      <ul class="footerLinks flex flex-col md:flex-row items-center list-none p-0 m-0">
         <template v-for="(item, index) in footerItems" :key="item">
-          <li class="footerLink py-2 md:py-0">{{ item }}</li>
-          <div v-if="index < footerItems.length - 1" class="dividerWrapper hidden md:flex">
-            <Divider layout="vertical" />
-          </div>
-          <!-- Mobile Divider (optional spacer) -->
-          <div v-if="index < footerItems.length - 1" class="md:hidden h-2"></div>
+          <!-- 連結項目 -->
+          <li class="footerLink py-4 md:py-0">
+            {{ item }}
+          </li>
+
+          <!-- 垂直分隔線: 強制僅在 md 以上顯示，且完全不佔據手機版空間 -->
+          <Divider 
+            v-if="index < footerItems.length - 1" 
+            layout="vertical" 
+            class="!hidden md:!flex mx-4 h-8 self-center" 
+          />
         </template>
       </ul>
+
     </div>
-  </div>
+  </footer>
 </template>
 
 <style scoped>
@@ -31,18 +39,15 @@ const footerItems = [
 }
 
 .footerLinks {
-  @apply text-white text-[1rem];
+  @apply text-white;
 }
 
 .footerLink {
-  @apply text-[1.5em] lg:text-[2em] leading-none px-[0.25em] cursor-pointer text-center;
+  @apply text-[1.2rem] md:text-[1.5rem] lg:text-[2rem] leading-none cursor-pointer text-center hover:text-gray-300 transition-colors;
 }
 
-.dividerWrapper {
-  @apply flex items-center h-full px-[0.25em];
-}
-
+/* 僅針對電腦版垂直線樣式 */
 :deep(.p-divider-vertical) {
-  @apply !border-l !border-white !h-[2.5em] self-center;
+  @apply !border-l !border-white !min-h-[2em];
 }
 </style>

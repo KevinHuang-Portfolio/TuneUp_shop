@@ -7,18 +7,19 @@ import ProductCardTopSales from '../components/ProductCardTopSales.vue';
 import ProductCardNew from '../components/ProductCardNew.vue';
 import AppFooter from '../components/AppFooter.vue';
 
-// 從資料層匯入 API 函式
+// 從資料層匯入 API 函式與型別
 import { 
   getHomeProducts, 
   getTopSalesProducts, 
   getTopSalesProducts2, 
-  getHomeNewProducts 
+  getHomeNewProducts,
+  type Product
 } from '../data/api';
 
-const products = ref<any[]>([]);
-const topSalesProducts = ref<any[]>([]);
-const topSalesProducts2 = ref<any[]>([]);
-const NewProducts = ref<any[]>([]);
+const products = ref<Product[]>([]);
+const topSalesProducts = ref<Product[]>([]);
+const topSalesProducts2 = ref<Product[]>([]);
+const NewProducts = ref<Product[]>([]);
 
 onMounted(async () => {
   try {
@@ -46,7 +47,7 @@ onMounted(async () => {
   <div class="home-wrapper overflow-x-hidden w-full flex flex-col items-center">
     
     <!-- Banner Section -->
-    <section class="w-full flex justify-center px-0 lg:px-0 mt-4 lg:mt-9 min-[1496px]:!mt-0">
+    <section class="w-full flex justify-center  min-[1496px]:mt-0">
       <div class="relative w-full max-w-[93.5em]">
         <router-link to="/cart">
           <Button 
@@ -63,34 +64,48 @@ onMounted(async () => {
     </section>
 
     <!-- Discounts Section -->
-    <section class="w-full max-w-[93.5em] mt-9 px-4 min-[1496px]:px-0 flex flex-col items-center">
+    <section class="w-full max-w-[93.5em] mt-9 px-0 min-[1496px]:px-0 flex flex-col items-center">
       <div class="w-full flex justify-center min-[1496px]:justify-start">
-        <a href="#" class="text-[2.25em] font-medium no-underline text-black block mb-4">優惠專區</a>
+        <a href="#" class="text-[1.8em] md:text-[2.25em] font-medium no-underline text-black block mb-4">優惠專區</a>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 min-[1496px]:flex min-[1496px]:flex-nowrap gap-[24px] w-full max-w-[46em] min-[1496px]:max-w-none justify-items-center mx-auto">
-        <ProductCard
-          v-for="item in products"
-          :key="item.id"
-          :info="item"
-          type="discount"
-        />
+      <div class="flex flex-col min-[1496px]:flex-row gap-[0.5em] md:gap-[24px] items-center min-[1496px]:items-start w-full">
+        <!-- Group 1 (在中尺寸下並排置中) -->
+        <div class="flex flex-row justify-center gap-[0.5em] md:gap-[24px] w-full min-[1496px]:w-auto">
+          <ProductCard
+            v-for="item in products.slice(0, 2)"
+            :key="item.id"
+            :info="item"
+            type="discount"
+          />
+        </div>
+        <!-- Group 2 (在中尺寸下並排置中) -->
+        <div class="flex flex-row justify-center gap-[0.5em] md:gap-[24px] w-full min-[1496px]:w-auto">
+          <ProductCard
+            v-for="item in products.slice(2, 4)"
+            :key="item.id"
+            :info="item"
+            type="discount"
+          />
+        </div>
       </div>
     </section>
 
     <!-- Best Sellers Section -->
-    <section class="w-full max-w-[93.5em] mt-9 px-4 min-[1496px]:px-0 flex flex-col items-center">
+    <section class="w-full max-w-[93.5em] mt-9 px-0 min-[1496px]:px-0 flex flex-col items-center">
       <div class="w-full flex justify-center min-[1496px]:justify-start">
-        <a href="#" class="text-[2.25em] font-medium no-underline text-black block mb-4">售出最多</a>
+        <a href="#" class="text-[1.8em] md:text-[2.25em] font-medium no-underline text-black block mb-4">售出最多</a>
       </div>
-      <div class="flex flex-wrap justify-center min-[1496px]:flex-nowrap gap-[24px] w-full mt-4">
-        <div class="flex justify-center flex-shrink-0">
+      <div class="flex flex-col min-[1496px]:flex-row gap-[0.5em] md:gap-[24px] items-center min-[1496px]:items-start w-full">
+        <!-- Row 1: Top 1 (在中尺寸下置中) -->
+        <div class="flex justify-center w-full min-[1496px]:w-auto">
           <ProductCardTopSales
             v-for="item in topSalesProducts"
             :key="'top1-' + item.id"
             :info="item"
           />
         </div>
-        <div class="flex flex-wrap justify-center min-[1496px]:flex-nowrap gap-[24px]">
+        <!-- Row 2: Top 2 & 3 (在中尺寸下並排且置中) -->
+        <div class="flex flex-row justify-center gap-[0.5em] md:gap-[24px] w-full min-[1496px]:w-auto">
           <ProductCardTopSales
             v-for="item in topSalesProducts2"
             :key="'top2-' + item.id"
@@ -101,12 +116,27 @@ onMounted(async () => {
     </section>
 
     <!-- New Arrivals Section -->
-    <section class="w-full max-w-[93.5em] mt-9 px-4 min-[1496px]:px-0 flex flex-col items-center mb-12">
+    <section class="w-full max-w-[93.5em] mt-9 px-0 min-[1496px]:px-0 flex flex-col items-center">
       <div class="w-full flex justify-center min-[1496px]:justify-start">
-        <a href="#" class="text-[2.25em] font-medium no-underline text-black block mb-4">新品上市</a>
+        <a href="#" class="text-[1.8em] md:text-[2.25em] font-medium no-underline text-black block mb-4">新品上市</a>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 min-[1496px]:flex min-[1496px]:flex-nowrap gap-[24px] w-full max-w-[46em] min-[1496px]:max-w-none justify-items-center mx-auto mt-4">
-        <ProductCardNew v-for="item in NewProducts" :key="item.id" :info="item" />
+      <div class="flex flex-col min-[1496px]:flex-row gap-[0.5em] md:gap-[24px] items-center min-[1496px]:items-start w-full">
+        <!-- Group 1 (在中尺寸下並排置中) -->
+        <div class="flex flex-row justify-center gap-[0.5em] md:gap-[24px] w-full min-[1496px]:w-auto">
+          <ProductCardNew
+            v-for="item in NewProducts.slice(0, 2)"
+            :key="item.id"
+            :info="item"
+          />
+        </div>
+        <!-- Group 2 (在中尺寸下並排置中) -->
+        <div class="flex flex-row justify-center gap-[0.5em] md:gap-[24px] w-full min-[1496px]:w-auto">
+          <ProductCardNew
+            v-for="item in NewProducts.slice(2, 4)"
+            :key="item.id"
+            :info="item"
+          />
+        </div>
       </div>
     </section>
 
@@ -116,7 +146,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-/* Ensure no horizontal scroll on mobile */
 .home-wrapper {
   width: 100%;
 }

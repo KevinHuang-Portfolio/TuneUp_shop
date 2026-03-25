@@ -1,21 +1,50 @@
 ﻿import axios from 'axios';
+import { z } from 'zod';
 
-// 雿輻 Vite ?憓??訾?????蝬脣?
+// 1. 定義商品基礎 Schema
+export const ProductSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  price: z.number(),
+  image: z.string(),
+  // 這裡可以根據 db.json 實際欄位調整，例如有些商品有 discountPrice
+  discountPrice: z.number().optional(),
+  tag: z.string().optional(),
+});
+
+// 2. 推導出 TypeScript 型別
+export type Product = z.infer<typeof ProductSchema>;
+
+// 3. 定義陣列 Schema 用於列表 API
+const ProductListSchema = z.array(ProductSchema);
+
+// 使用 Vite 的環境變數設定 API 基礎路徑
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   timeout: 5000,
 });
 
-export const getHomeProducts = () => apiClient.get('/homeProducts').then(res => res.data);
-export const getTopSalesProducts = () => apiClient.get('/topSalesProducts').then(res => res.data);
-export const getTopSalesProducts2 = () => apiClient.get('/topSalesProducts2').then(res => res.data);
-export const getHomeNewProducts = () => apiClient.get('/homeNewProducts').then(res => res.data);
+// 4. 實作經過驗證的 API 函式
+export const getHomeProducts = (): Promise<Product[]> => 
+  apiClient.get('/homeProducts').then(res => ProductListSchema.parse(res.data));
 
-export const getCategoryProductList = () => apiClient.get('/page1ProductList').then(res => res.data);
-export const getCategoryDefaultCards = () => apiClient.get('/page1DefaultCards').then(res => res.data);
+export const getTopSalesProducts = (): Promise<Product[]> => 
+  apiClient.get('/topSalesProducts').then(res => ProductListSchema.parse(res.data));
+
+export const getTopSalesProducts2 = (): Promise<Product[]> => 
+  apiClient.get('/topSalesProducts2').then(res => ProductListSchema.parse(res.data));
+
+export const getHomeNewProducts = (): Promise<Product[]> => 
+  apiClient.get('/homeNewProducts').then(res => ProductListSchema.parse(res.data));
+
+export const getCategoryProductList = (): Promise<Product[]> => 
+  apiClient.get('/page1ProductList').then(res => ProductListSchema.parse(res.data));
+
+export const getCategoryDefaultCards = (): Promise<Product[]> => 
+  apiClient.get('/page1DefaultCards').then(res => ProductListSchema.parse(res.data));
 
 // 獲取所有可能的商品來源 (增強容錯)
-export const getAllProducts = async () => {
+export const getAllProducts = async (): Promise<Product[]> => {
   try {
     const results = await Promise.allSettled([
       getHomeProducts(),

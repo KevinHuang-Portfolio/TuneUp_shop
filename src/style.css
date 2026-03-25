@@ -1,9 +1,7 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
-/* ??撘 PrimeVue ?箇?璅??嚗??JS ?梢撠?函 */
 @layer base {
   :root {
     --p-primary-color: #000000;
   }
 }
-

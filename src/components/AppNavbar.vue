@@ -85,10 +85,10 @@ const navItems = [
           v-else
           icon="pi pi-bars" 
           @click="visible = true" 
-          class="!bg-black !border-black !w-20 !h-20 !p-0 flex items-center justify-center" 
+          class="!bg-black !border-black !w-12 !h-12 !p-0 flex items-center justify-center" 
         >
           <template #icon>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </template>
@@ -105,10 +105,10 @@ const navItems = [
       <Button 
         icon="pi pi-bars" 
         @click="visible = true" 
-        class="!bg-black !border-black !w-20 !h-20 !p-0 flex items-center justify-center" 
+        class="!bg-black !border-black !w-12 !h-12 !p-0 flex items-center justify-center" 
       >
         <template #icon>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </template>
